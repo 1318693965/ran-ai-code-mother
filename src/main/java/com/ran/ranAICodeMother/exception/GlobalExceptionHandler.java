@@ -1,7 +1,8 @@
 package com.ran.ranAICodeMother.exception;
 
-import com.xiaoyu.ranaiagent.common.BaseResponse;
-import com.xiaoyu.ranaiagent.common.ResultUtils;
+
+import com.ran.ranAICodeMother.common.BaseResponse;
+import com.ran.ranAICodeMother.common.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

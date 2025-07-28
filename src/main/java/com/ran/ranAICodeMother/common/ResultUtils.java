@@ -1,7 +1,7 @@
 package com.ran.ranAICodeMother.common;
 
 
-import com.xiaoyu.ranaiagent.exception.ErrorCode;
+import com.ran.ranAICodeMother.exception.ErrorCode;
 
 /**
  * 响应工具类

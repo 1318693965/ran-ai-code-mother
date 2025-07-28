@@ -1,7 +1,8 @@
 package com.ran.ranAICodeMother.common;
 
 
-import com.xiaoyu.ranaiagent.exception.ErrorCode;
+
+import com.ran.ranAICodeMother.exception.ErrorCode;
 import lombok.Data;
 
 import java.io.Serializable;
