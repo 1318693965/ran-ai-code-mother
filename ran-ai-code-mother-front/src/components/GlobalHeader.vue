@@ -4,8 +4,8 @@
       <!-- 左侧 Logo 和标题 -->
       <div class="header-left">
         <div class="logo-container">
-          <img src="@/assets/logo.png" alt="Logo" class="logo" />
-          <h1 class="site-title">AI零代码生成平台</h1>
+          <img src="@/assets/logo.svg" alt="Logo" class="logo" />
+          <h1 class="site-title">编程导航</h1>
         </div>
 
         <!-- 菜单项 -->
@@ -32,66 +32,23 @@
 
       <!-- 右侧用户信息 -->
       <div class="header-right">
-        <a-dropdown>
-          <a-button type="text">
-            <SettingOutlined />
-          </a-button>
-          <template #overlay>
-            <a-menu>
-              <a-menu-item @click="() => switchTheme('default')">
-                <span>默认主题</span>
-              </a-menu-item>
-              <a-menu-item @click="() => switchTheme('dark')">
-                <span>暗黑主题</span>
-              </a-menu-item>
-              <a-menu-item @click="() => switchTheme('compact')">
-                <span>紧凑主题</span>
-              </a-menu-item>
-              <a-menu-divider />
-              <a-menu-item @click="handleLogout">
-                <span>登出</span>
-              </a-menu-item>
-            </a-menu>
-          </template>
-        </a-dropdown>
-        <a-button type="primary" @click="handleLogin" v-if="!isLoggedIn">
+        <a-button type="primary" @click="handleLogin">
           <template #icon>
             <UserOutlined />
           </template>
           登录
         </a-button>
-        <a-dropdown v-else>
-          <a-avatar style="background-color: #1890ff; vertical-align: middle" :size="32">
-            U
-          </a-avatar>
-          <template #overlay>
-            <a-menu>
-              <a-menu-item @click="handleProfile">
-                <span>个人资料</span>
-              </a-menu-item>
-              <a-menu-item @click="handleSettings">
-                <span>设置</span>
-              </a-menu-item>
-              <a-menu-divider />
-              <a-menu-item @click="handleLogout">
-                <span>登出</span>
-              </a-menu-item>
-            </a-menu>
-          </template>
-        </a-dropdown>
       </div>
     </div>
   </a-layout-header>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { UserOutlined, SettingOutlined } from '@ant-design/icons-vue'
-import { message } from 'ant-design-vue'
+import { UserOutlined } from '@ant-design/icons-vue'
 
 const route = useRoute()
-const isLoggedIn = ref(false) // 暂时设置为未登录状态
 
 // 当前选中的菜单项
 const selectedKeys = computed(() => {
@@ -112,45 +69,6 @@ const handleMenuClick = ({ key }: { key: string }) => {
 const handleLogin = () => {
   console.log('点击登录')
   // 这里可以添加登录逻辑
-  message.success('登录成功')
-  isLoggedIn.value = true
-}
-
-// 登出处理
-const handleLogout = () => {
-  console.log('点击登出')
-  // 这里可以添加登出逻辑
-  message.success('登出成功')
-  isLoggedIn.value = false
-}
-
-// 个人资料
-const handleProfile = () => {
-  console.log('查看个人资料')
-  message.info('查看个人资料')
-}
-
-// 设置
-const handleSettings = () => {
-  console.log('打开设置')
-  message.info('打开设置')
-}
-
-// 切换主题
-const switchTheme = (theme: string) => {
-  console.log('切换主题:', theme)
-  message.info(`切换到${theme === 'default' ? '默认' : theme === 'dark' ? '暗黑' : '紧凑'}主题`)
-  
-  // 实际切换主题的逻辑
-  if (theme === 'dark') {
-    document.body.setAttribute('data-theme', 'dark')
-  } else if (theme === 'compact') {
-    document.body.setAttribute('data-theme', 'compact')
-  } else {
-    document.body.removeAttribute('data-theme')
-  }
-  
-  // 这里可以添加更复杂的主题切换逻辑
 }
 </script>
 
@@ -223,7 +141,6 @@ const switchTheme = (theme: string) => {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
 /* 响应式设计 */

@@ -3,14 +3,14 @@
     <div class="footer-container">
       <div class="footer-content">
         <span class="copyright-text">
-          学习项目 by
+          编程导航原创项目 by
           <a
-            href="https://cn.vuejs.org/"
+            href="https://www.codefather.cn"
             target="_blank"
             rel="noopener noreferrer"
             class="author-link"
           >
-            燃小宇
+            程序员鱼皮
           </a>
         </span>
       </div>
