@@ -1,6 +1,11 @@
 package com.ran.ranAICodeMother.controller;
 
 import com.mybatisflex.core.paginate.Page;
+import com.ran.ranAICodeMother.common.BaseResponse;
+import com.ran.ranAICodeMother.common.ResultUtils;
+import com.ran.ranAICodeMother.exception.ErrorCode;
+import com.ran.ranAICodeMother.exception.ThrowUtils;
+import com.ran.ranAICodeMother.model.dto.UserRegisterRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -89,6 +94,22 @@ public class UserController {
     @GetMapping("page")
     public Page<User> page(Page<User> page) {
         return userService.page(page);
+    }
+
+    /**
+     * 用户注册
+     *
+     * @param userRegisterRequest 用户注册请求
+     * @return 注册结果
+     */
+    @PostMapping("register")
+    public BaseResponse<Long> userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
+        ThrowUtils.throwIf(userRegisterRequest == null, ErrorCode.PARAMS_ERROR);
+        String userAccount = userRegisterRequest.getUserAccount();
+        String userPassword = userRegisterRequest.getUserPassword();
+        String checkPassword = userRegisterRequest.getCheckPassword();
+        long result = userService.userRegister(userAccount, userPassword, checkPassword);
+        return ResultUtils.success(result);
     }
 
 }

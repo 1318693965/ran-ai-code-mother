@@ -4,7 +4,7 @@
       <!-- 左侧 Logo 和标题 -->
       <div class="header-left">
         <div class="logo-container">
-          <img src="@/assets/logo.svg" alt="Logo" class="logo" />
+          <img src="@/assets/logo.png" alt="Logo" class="logo" />
           <h1 class="site-title">编程导航</h1>
         </div>
 
