@@ -1,4 +1,21 @@
 <template>
+  <div id="userManagePage">
+    <!-- 搜索表单 -->
+    <a-form layout="inline" :model="searchParams" @finish="doSearch">
+      <a-form-item label="账号">
+        <a-input v-model:value="searchParams.userAccount" placeholder="输入账号" />
+      </a-form-item>
+      <a-form-item label="用户名">
+        <a-input v-model:value="searchParams.userName" placeholder="输入用户名" />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" html-type="submit">搜索</a-button>
+      </a-form-item>
+    </a-form>
+    <a-divider />
+    <!-- 表格 -->
+  </div>
+
   <a-table :columns="columns" :data-source="data" :pagination="pagination" @change="doTableChange">
     <template #headerCell="{ column }">
       <template v-if="column.key === 'name'">
@@ -25,7 +42,7 @@
         {{ dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss') }}
       </template>
       <template v-else-if="column.key === 'action'">
-        <a-button danger>删除</a-button>
+        <a-button danger @click="doDelete(record.id)">删除</a-button>
       </template>
     </template>
   </a-table>
@@ -112,6 +129,30 @@ const doTableChange = (page: any) => {
   searchParams.pageSize = page.pageSize
   fetchData()
 }
+
+// 删除数据
+const doDelete = async (id: string) => {
+  if (!id) {
+    return
+  }
+  const res = await deleteUser({ id })
+  if (res.data.code === 0) {
+    message.success('删除成功')
+    // 刷新数据
+    fetchData()
+  } else {
+    message.error('删除失败')
+  }
+}
+
+
+// 获取数据
+const doSearch = () => {
+  // 重置页码
+  searchParams.pageNum = 1
+  fetchData()
+}
+
 
 // 页面加载时请求一次
 onMounted(() => {
