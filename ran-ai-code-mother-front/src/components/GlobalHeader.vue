@@ -31,22 +31,45 @@
       </div>
 
       <!-- 右侧用户信息 -->
-      <div class="header-right">
-        <a-button type="primary" @click="handleLogin">
-          <template #icon>
-            <UserOutlined />
-          </template>
-          登录
-        </a-button>
+      <div class="user-login-status">
+        <div v-if="loginUserStore.loginUser.id">
+          <a-dropdown>
+            <a-space>
+              <a-avatar :src="loginUserStore.loginUser.userAvatar" />
+              {{ loginUserStore.loginUser.userName ?? '无名' }}
+            </a-space>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item @click="doLogout">
+                  <LogoutOutlined />
+                  退出登录
+                </a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+        </div>
+        <div v-else>
+          <a-button type="primary" href="/user/login">登录</a-button>
+        </div>
       </div>
+
     </div>
   </a-layout-header>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { UserOutlined } from '@ant-design/icons-vue'
+import { useRoute, useRouter } from 'vue-router'
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue'
+import { useLoginUserStore } from '@/stores/loginUser.ts'
+import { userLogout } from '@/api/userController.ts'
+import { message } from 'ant-design-vue'
+
+// JS 中引入 Store
+const loginUserStore = useLoginUserStore()
+const router = useRouter()
+// HTML 展示数据
+{{ JSON.stringify(loginUserStore.loginUser) }}
 
 const route = useRoute()
 
@@ -69,6 +92,20 @@ const handleMenuClick = ({ key }: { key: string }) => {
 const handleLogin = () => {
   console.log('点击登录')
   // 这里可以添加登录逻辑
+}
+
+// 用户注销
+const doLogout = async () => {
+  const res = await userLogout()
+  if (res.data.code === 0) {
+    loginUserStore.setLoginUser({
+      userName: '未登录',
+    })
+    message.success('退出登录成功')
+    await router.push('/user/login')
+  } else {
+    message.error('退出登录失败，' + res.data.message)
+  }
 }
 </script>
 
