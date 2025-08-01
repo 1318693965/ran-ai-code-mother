@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author xiaozhi
  * @date 2025/7/28
  */
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@SpringBootApplication
 @MapperScan("com.ran.ranAICodeMother.mapper")
 @EnableScheduling
 @EnableAsync

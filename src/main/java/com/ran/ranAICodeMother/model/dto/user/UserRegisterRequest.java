@@ -1,4 +1,4 @@
-package com.ran.ranAICodeMother.model.dto;
+package com.ran.ranAICodeMother.model.dto.user;
 
 import lombok.Data;
 

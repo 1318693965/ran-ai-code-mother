@@ -13,6 +13,8 @@ public class PageRequest {
      */
     private int current = 1;
 
+    private int pageNum = 10;
+
     /**
      * 页面大小
      */
