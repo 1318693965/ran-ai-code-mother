@@ -1,0 +1,49 @@
+spring:
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ran-ai-code-mother?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+    username: root
+    password: 123456
+  ai:
+    dashscope:
+      api-key: sk-93920359ef454cadb152bd82d395ce5b
+      chat:
+        options:
+          model: qwq-plus
+          stream: true
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:1.5b
+server:
+  port: 8123
+  servlet:
+    context-path: /api
+# Knife4j 启动后地址： http://localhost:8123/api/doc.html
+# springdoc-openapi
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.ran.ranAICodeMother.controller
+# knife4j
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+# AI
+langchain4j:
+  open-ai:
+    chat-model:
+      base-url: https://api.deepseek.com
+      api-key: sk-a7f39f6608124953875f3e1c7d8117b1
+      model-name: deepseek-chat
+      log-requests: true
+      log-responses: true
